@@ -1,10 +1,16 @@
 from fastapi import FastAPI
-from app.config.routers import include_all_routers
+from config.routers import ROUTERS
 
-app = FastAPI(title="Sistema de Gestión de Inventario para Restaurantes")
+app = FastAPI(
+    title="API Restaurante",
+    description="API para gestión de inventario de restaurante",
+    version="1.0.0"
+)
 
-include_all_routers(app)
+for router in ROUTERS:
+    app.include_router(router)
 
 @app.get("/")
 def root():
-    return {"msg": "API funcionando correctamente"}
+    return {"message": "API funcionando correctamente"}
+
